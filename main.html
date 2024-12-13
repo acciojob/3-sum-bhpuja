@@ -6,9 +6,9 @@
   <title>3 Sum Problem</title>
 </head>
 <body>
-  <h1>3 Sum Problem: Find Closest Sum</h1>
+  <h1>Find Closest Sum to Target</h1>
 
-  <p>Array: [-1, 2, 1, -4]</p>
+  <p>Given Array: [-1, 2, 1, -4]</p>
   <p>Target: 1</p>
   
   <button onclick="findClosestSum()">Find Closest Sum</button>
@@ -17,14 +17,12 @@
 
   <script>
     function threeSum(S, target) {
-      // Sort the array
-      S.sort((a, b) => a - b);
+      S.sort((a, b) => a - b);  // Sort the array
+      let closestSum = Infinity;  // Initialize closest sum
 
-      let closestSum = Infinity;
-
-      // Iterate over the array
+      // Loop over the array
       for (let i = 0; i < S.length - 2; i++) {
-        // Skip duplicates to avoid duplicate triplets
+        // Skip duplicate elements
         if (i > 0 && S[i] === S[i - 1]) continue;
 
         let left = i + 1;
@@ -34,33 +32,34 @@
         while (left < right) {
           const currentSum = S[i] + S[left] + S[right];
 
-          // Update the closest sum if necessary
+          // Update closest sum if current sum is closer to target
           if (Math.abs(currentSum - target) < Math.abs(closestSum - target)) {
             closestSum = currentSum;
           }
 
-          // Adjust the pointers based on the current sum
+          // Move the pointers based on current sum
           if (currentSum < target) {
             left++;
           } else if (currentSum > target) {
             right--;
           } else {
-            return currentSum; // Return if the sum matches the target exactly
+            return currentSum;  // Return exact match if found
           }
         }
       }
-
-      return closestSum;
+      return closestSum;  // Return the closest sum
     }
 
     function findClosestSum() {
-      const array = [-1, 2, 1, -4];
-      const target = 1;
-      const closestSum = threeSum(array, target);
-      
-      // Display the result in the webpage
+      const array = [-1, 2, 1, -4];  // Array of integers
+      const target = 1;  // Target sum
+      const closestSum = threeSum(array, target);  // Call the threeSum function
+
+      // Display the result
       document.getElementById("result").innerText = `The closest sum to the target ${target} is: ${closestSum}`;
     }
   </script>
+
 </body>
 </html>
+
